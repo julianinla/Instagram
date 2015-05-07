@@ -28,7 +28,14 @@ if (isset($_GET['code'])) {
 	curl_setopt($curl, CURLOPT_POSTFIELDS, access_token_settings); //setting POSTFIELDS to array setup we created
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); //setting equal to 1, getting strings back
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //work, set to true
+
+
+$result = curl_exec($curl);
+curl_close();
+
 }
+
+else {
 
 ?>
 
@@ -45,3 +52,8 @@ if (isset($_GET['code'])) {
 		after getting aprroval now going to have info to play with it -->
 	</body>
 </html>
+
+<?php 
+
+}
+

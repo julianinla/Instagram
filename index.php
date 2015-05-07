@@ -22,6 +22,12 @@ if (isset($_GET['code'])) {
 									'redirect_uri' => redirectURI,
 									'code' => $code
 									);
+	//cURL is what we use in php, library for calls to other apis
+	$curl = curl_init($url); //setting curl session, get data from url
+	curl_setopt($curl, CURLOPT_POST, true);	
+	curl_setopt($curl, CURLOPT_POSTFIELDS, access_token_settings); //setting POSTFIELDS to array setup we created
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); //setting equal to 1, getting strings back
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //work, set to true
 }
 
 ?>

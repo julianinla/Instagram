@@ -13,6 +13,18 @@ define('clientSecret', 'fbfc98c3740a4b7893dea4ae3862a027');
 define('redirectURI', 'http://localhost/AppAcademyAPI/index.php');
 define('ImageDirectory', 'pics/');
 
+//function that is going to connect to instagram
+function connectToInstagram($url) {
+	$ch = curl_init();
+
+	curl_setopt_array($ch, array[
+		CURLOPT_URL => $url,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_SSL_VERIFYPEER => false,
+		CURLOPT_SSL_VERIFYHOST => 2
+	]);
+}
+
 if (isset($_GET['code'])) {
 	$code = ($_GET['code']);
 	$url = 'https://api.instagram.com/oauth/access_token';

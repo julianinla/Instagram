@@ -30,7 +30,11 @@ function connectToInstagram($url) {
 
 //function to get userid cause username doesnt allow us to get pictures
 function getUserID($userName) {
+	$url = 'http://api.instagram.com/v1/users/search?q=' . $userName . '&client_id=' . clientID;
+	$instagramInfo = connectToInstagram($url);
+	$results = json_decode($instagramInfo, true);
 
+	echo $results['data']['0']['id'];
 }
 
 if (isset($_GET['code'])) {
@@ -45,7 +49,7 @@ if (isset($_GET['code'])) {
 	//cURL is what we use in php, library for calls to other apis
 	$curl = curl_init($url); //setting curl session, get data from url
 	curl_setopt($curl, CURLOPT_POST, true);	
-	curl_setopt($curl, CURLOPT_POSTFIELDS, access_token_settings); //setting POSTFIELDS to array setup we created
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $access_token_settings); //setting POSTFIELDS to array setup we created
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); //setting equal to 1, getting strings back
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //work, set to true
 
@@ -54,11 +58,11 @@ if (isset($_GET['code'])) {
 	curl_close($curl);
 
 	$results = json_decode($result, true);
-	echo $results['user']['username'];
+	getUserID($results['user']['username']);
 }
 
 else {
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +79,4 @@ else {
 	</body>
 </html>
 
-<?php 
-
-}
 

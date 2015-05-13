@@ -30,21 +30,21 @@ function connectToInstagram($url) {
 
 //function to get userid cause username doesnt allow us to get pictures
 function getUserID($userName) {
-	$url = 'http://api.instagram.com/v1/users/search?q=' . $userName . '&client_id=' . clientID;
+	$url = 'https://api.instagram.com/v1/users/search?q=' . $userName . '&client_id=' .clientID;
 	$instagramInfo = connectToInstagram($url);
 	$results = json_decode($instagramInfo, true);
 
-	echo $results['data']['0']['id'];
+	return $results['data'][0]['id'];
 }
 //function to print out images onto screen
 function printImages($userID) {
-	$url = 'https://api.instagram.com/v1/users/' . userID . '/media/recent?client_id=' . clienID . 'count=5';
+	$url = 'https://api.instagram.com/v1/users/' . $userID . '/media/recent?client_id=' . clientID . '&count=5';
 	$instagramInfo = connectToInstagram($url);
 	$results = json_decode($instagramInfo, true);
 	//going to parse through info one by one
 	foreach ($results['data'] as $items) {
 		$image_url = $items['images']['low_resolution']['url'];
-		echo '<images src=" ' . $image_url . ' "/><br/>';
+		echo '<img src=" ' . $image_url . ' "/><br/>';
 	}
 }
 

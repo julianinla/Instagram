@@ -1,0 +1,20 @@
+.pic-style {
+  margin: 30px !important;
+  border-radius: 25px;
+  border: 2px solid yellow;
+  padding: 20px;
+}
+
+#login {
+  background-color: none !important;
+  border-color: yellow !important;
+}
+
+body {
+  background-image: url('/../AppAcademyAPI/img/space.jpg');
+}
+
+#align {
+  text-align: center !important;
+  margin: 300px 100px 90px 100px !important;
+}

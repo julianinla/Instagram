@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Instagram</title>
+	</head>
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+	<body>
+
 <?php 
 
 //Configuration for PHP server
@@ -8,8 +19,8 @@ session_start();
 
 //Make constants using define
 
-define('clientID', '6ffbb1a0e9244168bdae9011caa8f3bc');
-define('clientSecret', 'fbfc98c3740a4b7893dea4ae3862a027');
+define('clientID', 'c66db307cf7140acac34946afb74cfcc');
+define('clientSecret', 'f523fdc3d9004104a206616ff2bd2045');
 define('redirectURI', 'http://localhost/AppAcademyAPI/index.php');
 define('ImageDirectory', 'pics/');
 
@@ -38,14 +49,25 @@ function getUserID($userName) {
 }
 //function to print out images onto screen
 function printImages($userID) {
-	$url = 'https://api.instagram.com/v1/users/' . $userID . '/media/recent?client_id=' . clientID . '&count=5';
+	$url = 'https://api.instagram.com/v1/users/' . $userID . '/media/recent?client_id=' . clientID . '&count=6';
 	$instagramInfo = connectToInstagram($url);
 	$results = json_decode($instagramInfo, true);
 	//going to parse through info one by one
 	foreach ($results['data'] as $items) {
 		$image_url = $items['images']['low_resolution']['url'];
-		echo '<img src=" ' . $image_url . ' "/><br/>';
+		echo '<img src=" ' . $image_url . ' " class="pic-style">';
+		//calling a function to save img url
+		savePictures($image_url);
 	}
+}
+//function to save img to server
+function savePictures($image_url) {
+	return $image_url . '<br>';
+	$filename = basename($image_url); //storing filenmae, basename used to store
+	return $filename . '<br>';
+
+	$destination = ImageDirectory . $filename;
+	file_put_contents($destination, file_get_contents($image_url)); //grabs img stores in server
 }
 
 if (isset($_GET['code'])) {
@@ -78,21 +100,19 @@ if (isset($_GET['code'])) {
 }
 
 else {
-}
+
 ?>
 
-<!DOCTYPE html>
-
-<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
+	<div id="align">
 		<a href="https:api.instagram.com/oauth/authorize/?client_id=<?php echo clientID; ?>
-		&redirect_uri=<?php echo redirectURI; ?>&response_type=code">LOGIN</a>
+		&redirect_uri=<?php echo redirectURI; ?>&response_type=code" 
+		type="button" id="myButton" data-loading-text="Loading..." class="btn btn-warning" autocomplete="off" id="login">LOGIN</a>
 		<!-- creating login for people to get approve for web app to use Instagram account
 		after getting aprroval now going to have info to play with it -->
+	</div>
 	</body>
 </html>
 
+<?php
 
+}

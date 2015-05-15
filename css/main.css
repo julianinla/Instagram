@@ -18,3 +18,19 @@ body {
   text-align: center !important;
   margin: 300px 100px 90px 100px !important;
 }
+
+@media (min-device-width: 375px) and (max-width: 667px) {
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+  .pic-style {
+    width: 75%;
+    height: 40%;
+  }
+  #login {
+    width: 700px !important;
+    height: 700px !important;
+    font-size: 100px !important;
+  }
+}

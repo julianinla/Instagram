@@ -47,6 +47,8 @@ function getUserID($userName) {
 	$results = json_decode($instagramInfo, true);
 
 	return $results['data'][0]['id'];
+
+
 }
 //function to print out images onto screen
 function printImages($userID) {
@@ -60,6 +62,9 @@ function printImages($userID) {
 		//calling a function to save img url
 		savePictures($image_url);
 	}
+	echo '<script type="text/javascript">';
+	echo 'band.play();';
+	echo '</script>';
 }
 //function to save img to server
 function savePictures($image_url) {
@@ -112,6 +117,7 @@ else {
 		after getting aprroval now going to have info to play with it -->
 	</div>
 	</body>
+	<script src="js/main.js"></script>
 </html>
 
 <?php
